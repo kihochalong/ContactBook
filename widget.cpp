@@ -74,12 +74,36 @@ void Widget::on_pushButton_2_clicked()
     }
 
     Write(mFilename, saveFile);
-
 }
 
 
 void Widget::on_pushButton_4_clicked()
 {
     close();
+}
+
+
+void Widget::on_pushButton_3_clicked()
+{
+    QTableWidgetItem *inputRow1,*inputRow2,*inputRow3,*inputRow4;
+
+    inputRow1 = new QTableWidgetItem(QString(ui->lineEdit->text()));
+    inputRow2 = new QTableWidgetItem(QString(ui->lineEdit_2->text()));
+    inputRow3 = new QTableWidgetItem(QString(ui->lineEdit_3->text()));
+    inputRow4 = new QTableWidgetItem(QString(ui->lineEdit_4->text()));
+
+    ui->tableWidget->insertRow(ui->tableWidget->rowCount());
+
+    ui->tableWidget->setItem(ui->tableWidget->rowCount()-1,0,inputRow1);
+    ui->tableWidget->setItem(ui->tableWidget->rowCount()-1,1,inputRow2);
+    ui->tableWidget->setItem(ui->tableWidget->rowCount()-1,2,inputRow3);
+    ui->tableWidget->setItem(ui->tableWidget->rowCount()-1,3,inputRow4);
+
+    QString openFile = "";
+
+    int rc,cc;
+    rc=ui->tableWidget->rowCount();
+    cc=ui->tableWidget->columnCount();
+    mFilename = QFileDialog::getOpenFileName(this,"匯入檔案",".");
 }
 
