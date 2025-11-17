@@ -3,6 +3,7 @@
 
 #include<Qfile>
 #include<Qdebug>
+#include<QFileDialog>
 
 QString mFilename = "C:/Users/user/Documents/test.txt";
 
@@ -61,6 +62,10 @@ void Widget::on_pushButton_2_clicked()
 {
     QString saveFile = "";
 
+    int rc,cc;
+    rc=ui->tableWidget->rowCount();
+    cc=ui->tableWidget->columnCount();
+    mFilename = QFileDialog::getSaveFileName(this,"匯出檔案",".");
     for(int i = 0; i < ui->tableWidget->rowCount(); i++) {
         for(int j = 0; j < ui->tableWidget->columnCount(); j++) {
             saveFile += ui->tableWidget->item(i, j)->text() + ",";
@@ -70,5 +75,11 @@ void Widget::on_pushButton_2_clicked()
 
     Write(mFilename, saveFile);
 
+}
+
+
+void Widget::on_pushButton_4_clicked()
+{
+    close();
 }
 
