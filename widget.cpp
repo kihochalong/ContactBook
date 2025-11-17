@@ -85,25 +85,18 @@ void Widget::on_pushButton_4_clicked()
 
 void Widget::on_pushButton_3_clicked()
 {
-    QTableWidgetItem *inputRow1,*inputRow2,*inputRow3,*inputRow4;
+    QFile f(QFileDialog::getOpenFileName(this, "匯入檔案"));
+    if(!f.open(QFile::ReadOnly | QFile::Text)) return;
 
-    inputRow1 = new QTableWidgetItem(QString(ui->lineEdit->text()));
-    inputRow2 = new QTableWidgetItem(QString(ui->lineEdit_2->text()));
-    inputRow3 = new QTableWidgetItem(QString(ui->lineEdit_3->text()));
-    inputRow4 = new QTableWidgetItem(QString(ui->lineEdit_4->text()));
+    ui->tableWidget->setRowCount(0);
 
-    ui->tableWidget->insertRow(ui->tableWidget->rowCount());
-
-    ui->tableWidget->setItem(ui->tableWidget->rowCount()-1,0,inputRow1);
-    ui->tableWidget->setItem(ui->tableWidget->rowCount()-1,1,inputRow2);
-    ui->tableWidget->setItem(ui->tableWidget->rowCount()-1,2,inputRow3);
-    ui->tableWidget->setItem(ui->tableWidget->rowCount()-1,3,inputRow4);
-
-    QString openFile = "";
-
-    int rc,cc;
-    rc=ui->tableWidget->rowCount();
-    cc=ui->tableWidget->columnCount();
-    mFilename = QFileDialog::getOpenFileName(this,"匯入檔案",".");
+    QTextStream in(&f);
+    while(!in.atEnd()) {
+        QStringList s = in.readLine().split(",");
+        int r = ui->tableWidget->rowCount();
+        ui->tableWidget->insertRow(r);
+        for(int i = 0; i < s.size(); i++)
+            ui->tableWidget->setItem(r, i, new QTableWidgetItem(s[i]));
+    }
 }
 
