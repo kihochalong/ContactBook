@@ -1,9 +1,9 @@
 #include "widget.h"
 #include "ui_widget.h"
 
-#include<Qfile>
-#include<Qdebug>
-#include<QFileDialog>
+#include <QFile>
+#include <QDebug>
+#include <QFileDialog>
 
 QString mFilename = "C:/Users/user/Documents/test.txt";
 
