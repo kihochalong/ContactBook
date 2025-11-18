@@ -80,3 +80,10 @@ CMakeLists.txt.user*
 .rcc/
 .uic/
 /build*/
+
+# Backup files
+*.backup
+
+# Built executable
+ContactBook
+moc_predefs.h
